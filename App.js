@@ -1,20 +1,51 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+  import React from "react";
+  import { NativeBaseProvider } from 'native-base';
+  import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+  import { NavigationContainer } from "@react-navigation/native";
+  import Ionicons from 'react-native-vector-icons/Ionicons';
+  import CategoriasScreen from "./src/screens/CategoriasScreen";
+  import CardScreen from "./src/screens/CardScreen";
+  import PerfilScreens from "./src/screens/PerfilScreens";
+  import LoginScreen from "./src/screens/LoginScreen";
+  import Registro from "./src/Registro";
+  import ConfigScreen from "./src/screens/ConfigScreen";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+  const Tab = createBottomTabNavigator();
+
+  const MainTab = () => (
+    <Tab.Navigator
+      initialRouteName="Login"
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+          if (route.name === 'Categorias') {
+            iconName = 'menu';
+          } else if (route.name === 'Carrito') {
+            iconName = 'cart-outline';
+          } else if (route.name === 'Perfil') {
+            iconName = 'person-circle';
+          }
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: 'gray',
+        tabBarInactiveTintColor: 'red',
+      })}
+    >
+      <Tab.Screen name="Carrito" component={CardScreen} options={{ headerShown: false }} />
+      <Tab.Screen name="Categorias" component={CategoriasScreen} options={{ headerShown: false }} />
+      <Tab.Screen name="Perfil" component={PerfilScreens} options={{ headerShown: false }} />
+      <Tab.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+      <Tab.Screen name="Register" component={Registro} options={{ headerShown: false }} />
+      <Tab.Screen name="Config" component={ConfigScreen} options={{ headerShown: false }} />
+    </Tab.Navigator>
   );
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  export default function App() {
+    return (
+      <NativeBaseProvider>
+        <NavigationContainer>
+          <MainTab />
+        </NavigationContainer>
+      </NativeBaseProvider>
+    );
+  }
