@@ -1,4 +1,5 @@
   import React from "react";
+  import AntDesign from '@expo/vector-icons/AntDesign';
   import { NativeBaseProvider } from 'native-base';
   import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
   import { NavigationContainer } from "@react-navigation/native";
@@ -9,6 +10,7 @@
   import LoginScreen from "./src/screens/LoginScreen";
   import Registro from "./src/Registro";
   import ConfigScreen from "./src/screens/ConfigScreen";
+  import Competencias from "./src/screens/Competencias";
 
   const Tab = createBottomTabNavigator();
 
@@ -24,6 +26,8 @@
             iconName = 'cart-outline';
           } else if (route.name === 'Perfil') {
             iconName = 'person-circle';
+          } else if  (route.name === 'Competencias') {
+            return <AntDesign name="book" size={size} color={color} />;
           }
           return <Ionicons name={iconName} size={size} color={color} />;
         },
@@ -37,6 +41,7 @@
       <Tab.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
       <Tab.Screen name="Register" component={Registro} options={{ headerShown: false }} />
       <Tab.Screen name="Config" component={ConfigScreen} options={{ headerShown: false }} />
+      <Tab.Screen name="Competencias" component={Competencias} options={{ headerShown: false }} />
     </Tab.Navigator>
   );
 
