@@ -86,7 +86,7 @@ const Competencias = () => {
             nestedScrollEnabled
           />
         </View>
-
+    
         {/* Contenedor de FlatList */}
         <View style={styles.borderedList}>
           <Text style={styles.listHeaderTitle}>Proyectos</Text>
